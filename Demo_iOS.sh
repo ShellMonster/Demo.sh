@@ -40,7 +40,7 @@ rm -rf fastlane/screenshots
 rm -rf fastlane/Fastfile
 rm -rf fastlane/Appfile
 #添加提审规则；
-rule="  submission_information({
+echo "  submission_information({
       content_rights_contains_third_party_content: false,
       export_compliance_contains_third_party_cryptography: false,
       export_compliance_uses_encryption: false,
@@ -51,8 +51,7 @@ rule="  submission_information({
       add_id_info_limits_tracking: true,
       export_compliance_uses_encryption: false,
       export_compliance_encryption_updated: false,
-      })"
-echo ${rule} >>Deliverfile
+      })" >>Deliverfile
 
 echo "###以下为打包字段，等待即可"
 fastlane gym --workspace "${scheme}.xcworkspace" --scheme "${scheme}" --clean
