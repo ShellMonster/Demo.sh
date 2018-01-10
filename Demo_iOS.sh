@@ -51,7 +51,7 @@ echo "  submission_information({
       add_id_info_limits_tracking: true,
       export_compliance_uses_encryption: false,
       export_compliance_encryption_updated: false,
-      })" >>Deliverfile
+      })" >>./fastlane/Deliverfile
 
 echo "###以下为打包字段，等待即可"
 fastlane gym --workspace "${scheme}.xcworkspace" --scheme "${scheme}" --clean
