@@ -34,8 +34,24 @@ echo ${new_CFBundleVersion}
 #修改plist文件build号；
 sed -i "" "/>CFBundleVersion</{n;s/>[^<>]*</>${new_CFBundleVersion}</;}" ${plist_PATH}
 
-#删除fastlane配置，确保每次均能打包提审；
-rm -rf fastlane
+#删除fastlane元数据文件及截图文件，确保每次均能打包提审；
+rm -rf fastlane/metadata
+rm -rf fastlane/screenshots
+rm -rf fastlane/Fastfile
+rm -rf fastlane/Appfile
+#添加提审规则；
+echo "  submission_information({
+      content_rights_contains_third_party_content: false,
+      export_compliance_contains_third_party_cryptography: false,
+      export_compliance_uses_encryption: false,
+      add_id_info_uses_idfa: true,
+      add_id_info_serves_ads: true,
+      add_id_info_tracks_action: true,
+      add_id_info_tracks_install: true,
+      add_id_info_limits_tracking: true,
+      export_compliance_uses_encryption: false,
+      export_compliance_encryption_updated: false,
+      })" >>Deliverfile
 
 echo "###以下为打包字段，等待即可"
 fastlane gym --workspace "${scheme}.xcworkspace" --scheme "${scheme}" --clean
